@@ -24,6 +24,10 @@ public class EmployeeController {
     public ResponseEntity<GenericResponse<Employee>> createEmployee(@RequestBody EmployeeCreationRequest employeeCreationRequest) {
         return GenericResponse.success(employeeService.save(employeeCreationRequest));
     }
+    @PostMapping("/update")
+    public ResponseEntity<GenericResponse<Employee>> updateEmployee(@RequestBody EmployeeCreationRequest employeeCreationRequest) {
+        return GenericResponse.success(employeeService.save(employeeCreationRequest));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<GenericResponse<Employee>> getEmployee(@PathVariable Long id) {

@@ -31,23 +31,36 @@ public class EmployeeService {
     public Employee save(EmployeeCreationRequest employeeCreationRequest) {
         validation.setEmployee(employeeCreationRequest);
         validation.validateEmployee();
-        if (employeeRepo.findByNationalId(employeeCreationRequest.getNationalId()).isPresent()) {
-            throw new ClientException("employee", messageSource.getMessage("nationalId.unique", null, LocaleContextHolder.getLocale()));
-        }
         Employee employee = new Employee();
-        employee.setAge(employeeCreationRequest.getAge());
-        employee.setName(employeeCreationRequest.getName());
-        employee.setNationalId(employeeCreationRequest.getNationalId());
-        Branch branch;
-        Optional<Branch> branchOptional = branchRepo.findByName(employeeCreationRequest.getBranchName());
-        if (branchOptional.isPresent()) {
-            branch = branchOptional.get();
-        } else {
-            branch = new Branch();
-            branch.setName(employeeCreationRequest.getBranchName());
-            branch = branchRepo.save(branch);
+
+        if(employeeCreationRequest.getId() == null ) {
+            if (employeeRepo.findByNationalId(employeeCreationRequest.getNationalId()).isPresent()) {
+                throw new ClientException("employee", messageSource.getMessage("nationalId.unique", null, LocaleContextHolder.getLocale()));
+            }
+        }else{
+            employee.setId(employeeCreationRequest.getId());
         }
-        employee.setBranch(branch);
+        if (employeeCreationRequest.getAge() != null)
+            employee.setAge(employeeCreationRequest.getAge());
+
+        if (employeeCreationRequest.getAge() != null)
+            employee.setName(employeeCreationRequest.getName());
+
+        if (employeeCreationRequest.getAge() != null)
+            employee.setNationalId(employeeCreationRequest.getNationalId());
+
+        if (employeeCreationRequest.getBranchName() != null) {
+            Branch branch;
+            Optional<Branch> branchOptional = branchRepo.findByName(employeeCreationRequest.getBranchName());
+            if (branchOptional.isPresent()) {
+                branch = branchOptional.get();
+            } else {
+                branch = new Branch();
+                branch.setName(employeeCreationRequest.getBranchName());
+                branch = branchRepo.save(branch);
+            }
+            employee.setBranch(branch);
+        }
         return employeeRepo.save(employee);
     }
 
