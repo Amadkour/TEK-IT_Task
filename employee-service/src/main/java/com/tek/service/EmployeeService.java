@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
+import security.JwtUserDetailsService;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,8 @@ public class EmployeeService {
     private MessageSource messageSource;
     @Autowired
     EmployeeValidation validation;
-
+   @Autowired
+   JwtUserDetailsService jwtUserDetailsService;
     @Transactional
     public Employee save(EmployeeCreationRequest employeeCreationRequest) {
         validation.setEmployee(employeeCreationRequest);
@@ -53,6 +55,10 @@ public class EmployeeService {
 
     public Employee findById(Long id) {
         return employeeRepo.findById(id).orElseThrow(() -> new ClientException("employee", messageSource.getMessage("employee.notfound", new Object[]{id}, LocaleContextHolder.getLocale())));
+    }
+
+    public Employee findByNationalId(String nationalId) {
+        return employeeRepo.findByNationalId(nationalId).orElseThrow(() -> new ClientException("employee", messageSource.getMessage("employee.notfound", new Object[]{nationalId}, LocaleContextHolder.getLocale())));
     }
 
     public List<Employee> findAll() {

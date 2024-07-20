@@ -7,6 +7,7 @@ import com.tek.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import security.JwtUserDetailsService;
 
 import java.util.List;
 
@@ -15,6 +16,9 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    JwtUserDetailsService jwtUserDetailsService;
 
     @PostMapping("/create")
     public ResponseEntity<GenericResponse<Employee>> createEmployee(@RequestBody EmployeeCreationRequest employeeCreationRequest) {
@@ -30,9 +34,16 @@ public class EmployeeController {
     public ResponseEntity<GenericResponse<List<Employee>>> getAllEmployees() {
         return GenericResponse.success(employeeService.findAll());
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<GenericResponse<Object>> deleteEmployee(@PathVariable Long id) {
 
-      return   GenericResponse.successWithMessageOnly(employeeService.deleteById(id));
+        return GenericResponse.successWithMessageOnly(employeeService.deleteById(id));
+    }
+
+    @GetMapping("/{token}")
+    public ResponseEntity<GenericResponse<Object>> createEmployeeToken(@RequestHeader String nationalId) {
+        jwtUserDetailsService.createToken(nationalId);
+        return GenericResponse.success(jwtUserDetailsService.createToken(nationalId));
     }
 }
