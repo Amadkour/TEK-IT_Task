@@ -45,7 +45,7 @@ public class GenericResponse<T> {
                 return ResponseEntity.ok(GenericResponse.<Object>builder()
                                 .messages(null)
                                 .data(meMap)
-                                .code(200)
+                                .code(Constants.SUCCESS_CODE)
                                 .success(true)
                                 .build());
         }

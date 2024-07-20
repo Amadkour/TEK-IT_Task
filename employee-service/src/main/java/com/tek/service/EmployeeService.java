@@ -1,6 +1,6 @@
 package com.tek.service;
 
-import com.tek.EmployeeValidation;
+import com.tek.validation.EmployeeValidation;
 import com.tek.dto.EmployeeCreationRequest;
 import com.tek.entity.Branch;
 import com.tek.entity.Employee;

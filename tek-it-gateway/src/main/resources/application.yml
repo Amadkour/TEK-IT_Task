@@ -6,8 +6,8 @@ spring:
          uri: lb://EMPLOYEE-APP
          predicates:
            - Path=/employee/**
-#         filters:
-#           - AuthenticationFilter
+         filters:
+           - AuthenticationFilter
 
  application:
    name: TEK-IT-GATEWAY
