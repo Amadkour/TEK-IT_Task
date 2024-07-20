@@ -19,13 +19,6 @@ public class LocaleConfig implements WebMvcConfigurer {
         messageSource.setUseCodeAsDefaultMessage(true);
         return messageSource;
     }
-//
-//    @Bean
-//    public LocaleResolver localeResolver() {
-//        AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
-//        localeResolver.setDefaultLocale(Locale.ENGLISH);
-//        return localeResolver;
-//    }
 @Bean
 public LocaleResolver localeResolver() {
     SessionLocaleResolver localeResolver = new SessionLocaleResolver();

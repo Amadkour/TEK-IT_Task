@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/discovry-service/discovry-service.iml" filepath="$PROJECT_DIR$/discovry-service/discovry-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/employee-service/employee-service.iml" filepath="$PROJECT_DIR$/employee-service/employee-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tek-it-gateway/tek-it-gateway.iml" filepath="$PROJECT_DIR$/tek-it-gateway/tek-it-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/tek_task.iml" filepath="$PROJECT_DIR$/.idea/tek_task.iml" />
     </modules>
   </component>
