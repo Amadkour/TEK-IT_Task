@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
-import security.JwtUserDetailsService;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,8 +26,7 @@ public class EmployeeService {
     private MessageSource messageSource;
     @Autowired
     EmployeeValidation validation;
-   @Autowired
-   JwtUserDetailsService jwtUserDetailsService;
+
     @Transactional
     public Employee save(EmployeeCreationRequest employeeCreationRequest) {
         validation.setEmployee(employeeCreationRequest);

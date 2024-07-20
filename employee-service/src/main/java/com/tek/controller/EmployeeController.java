@@ -7,7 +7,7 @@ import com.tek.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import security.JwtUserDetailsService;
+import com.tek.service.security.JwtUserDetailsService;
 
 import java.util.List;
 
@@ -41,8 +41,8 @@ public class EmployeeController {
         return GenericResponse.successWithMessageOnly(employeeService.deleteById(id));
     }
 
-    @GetMapping("/{token}")
-    public ResponseEntity<GenericResponse<Object>> createEmployeeToken(@RequestHeader String nationalId) {
+    @GetMapping("/token")
+    public ResponseEntity<GenericResponse<Object>> createEmployeeToken(@RequestHeader("national_id") String nationalId) {
         jwtUserDetailsService.createToken(nationalId);
         return GenericResponse.success(jwtUserDetailsService.createToken(nationalId));
     }
